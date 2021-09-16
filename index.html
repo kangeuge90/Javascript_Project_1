@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,30 +8,38 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <h1>Food Matching Game</h1>
-    </header>
-    <main>
-        <input class="start" type="submit" value="Start">
-        <p id="timer">00:00:00</p>
-        <input class="reset" type="submit" value="Reset">
-        <nav class="foods">
-            <div><img src="assets/Hamburger.jpg"></div>
-            <div><img src="assets/Pizza.jpg"></div>
-            <div><img src="assets/Spaghetti.jpg"></div>
-            <div><img src="assets/Steak.jpg"></div>
-            <div><img src="assets/Sushi.jpg"></div>
-            <div><img src="assets/Tacos.jpg"></div>
-            <div><img src="assets/Hamburger.jpg"></div>
-            <div><img src="assets/Pizza.jpg"></div>
-            <div><img src="assets/Spaghetti.jpg"></div>
-            <div><img src="assets/Steak.jpg"></div>
-            <div><img src="assets/Sushi.jpg"></div>
-            <div><img src="assets/Tacos.jpg"></div>
-        </nav>
-    </main>
+    <div id='grad'>
+        <header>
+            <h1>Food Matching Game</h1>
+        </header>
+        <main>
+            <div class='objects'>
+                <input class="start" type="submit" value="Start">
+                <p id="timer">00:00:00</p>
+                <input class="reset" type="submit" value="Reset">
+            </div>
+            <nav class="foods">
+                <div><img class='cardfront' src="assets/Hamburger.jpg"></div>
+                <div><img class='cardfront' src="assets/Pizza.jpg"></div>
+                <div><img class='cardfront' src="assets/Spaghetti.jpg"></div>
+                <div><img class='cardfront' src="assets/Steak.jpg"></div>
+                <div><img class='cardfront' src="assets/Sushi.jpg"></div>
+                <div><img class='cardfront' src="assets/Tacos.jpg"></div>
+                <div><img class='cardfront' src="assets/Hamburger.jpg"></div>
+                <div><img class='cardfront' src="assets/Pizza.jpg"></div>
+                <div><img class='cardfront' src="assets/Spaghetti.jpg"></div>
+                <div><img class='cardfront' src="assets/Steak.jpg"></div>
+                <div><img class='cardfront' src="assets/Sushi.jpg"></div>
+                <div><img class='cardfront' src="assets/Tacos.jpg"></div>
+            </nav>
+        </main>
+    </div>
     <script src="script.js" async defer></script>
 </body>
 

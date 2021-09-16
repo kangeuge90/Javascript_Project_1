@@ -1,9 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#grad {
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(to bottom left, #0067b3, #40b0df, #ffd53d, #ffff02);
+}
+
 .foods {
     display: flex;
     flex-wrap: wrap;
-    
+    justify-content: space-between;
 }
+
 img {
-    height: 300px;
-    width: 210px;
+    /* border-style: solid 25px black; -not working atm*/
+    height: 20vh;
+    min-height: 200px;
+    max-height: 300px;
+    width: 10vw;
+    min-width: 140px;
+    max-width: 210px;
 }
+
+nav {
+    justify-content: space-between;
+}
+
+div {
+    width: 25%;
+}
+
+header {
+    background-color: rgb(49, 49, 77);
+    color: white;
+    margin: auto;
+    text-align: center;
+}
+
+.objects {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 0 0 25px 0;
+}
+
+.start {
+    border-radius: 10%;
+    width: 65px;
+    margin: 0 25px;
+}
+
+.reset {
+    border-radius: 10%;
+    width: 65px;
+    margin: 0 25px;
+}
+
+
+/* 4 way split  ----grid-template-columns: 25% 25% 25% 25%; */
+
+
+/* #hamburger {
+    background-image: Hamburger.jpg;
+
+}
+
+#pizza {
+   background-image: Pizza.jpg;
+}
+
+#spaghetti {
+background-image: Spaghetti.jpg;
+}
+
+#steak {
+background-image: Steak.jpg;
+}
+
+#sushi {
+background-image: Sushi.jpg;
+}
+
+#tacos {
+background-image: Tacos.jpg;
+} */
