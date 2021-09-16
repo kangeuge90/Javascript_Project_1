@@ -25,6 +25,9 @@ function randomize() {
 // 6 classes using math.random
 // Must also refresh the game, bring back all cards to cardback showing
 
+// OR possible make an array of 6 images, that can only be assigned a maximum 
+// of two times to each div
+
 let hour = 0;
 let minute = 0;
 let second = 0;
