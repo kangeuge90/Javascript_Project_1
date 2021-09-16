@@ -2,16 +2,23 @@
 const startGame = document.getElementsByClassName("start");
 startGame.addEventListener("submit", (event) => {
 
-    event.preventDefault();
-})
+        event.preventDefault();
+    })
+    // Must reset timer, then randomize cards, and then start timer on every click
+    // OR it can pause timer, and pause game (not allow flipCard to activate) and unpause upon reactivation
 
 function flipCard() {
 
 }
+// on event 'click', switch from card back to card front, and possibly 
+// work in reverse- optional, when 2 cards are picked either flip back 
+// over if no match, or keep flipped if match
 
 function randomize() {
 
 }
+// possible solution: assign each div a random #1-12 and assign them 1 of
+// 6 classes using math.random
 
 let hour = 0;
 let minute = 0;
