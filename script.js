@@ -5,25 +5,25 @@
 //     event.preventDefault();
 // })
 
-// Must reset timer, then randomize cards, and then start timer on every click
+// Must reset timer, then randomize cards(set facedown), and then start timer on every click
 // OR it can pause timer, and pause game (not allow flipCard to activate) and unpause upon reactivation
 
 function flipCard() {
 
 }
-// on event 'click', switch from card back to card front, and possibly 
+// on event 'click', switch from facedown to faceup, and possibly 
 // work in reverse- optional, when 2 cards are picked either flip back 
 // over if no match, or keep flipped if match
 
 // Must remove cards if matched, after a short time
-// If cards do not match, must flip back to face down after a short time
+// If cards do not match, must flip back to facedown after a short time
 
 function randomize() {
 
 }
 // possible solution: assign each div a random #1-12 and assign them 1 of
 // 6 classes using math.random
-// Must also refresh the game, bring back all cards to cardback showing
+// Must also refresh the game, bring back all cards to facedown
 
 // OR possible make an array of 6 images, that can only be assigned a maximum 
 // of two times to each div
