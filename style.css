@@ -1,0 +1,9 @@
+.foods {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+img {
+    height: 300px;
+    width: 210px;
+}
