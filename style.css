@@ -65,6 +65,15 @@ header {
     margin: 0 25px;
 }
 
+@media only screen and (min-width:768px) {
+    img {
+        min-height: 200px;
+        max-height: 300px;
+        min-width: 140px;
+        max-width: 210px;
+    }
+}
+
 
 /* #hamburger {
     background-image: Hamburger.jpg;
