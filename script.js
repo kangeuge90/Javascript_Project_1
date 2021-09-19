@@ -25,6 +25,11 @@ startGame.addEventListener("click", (event) => {
 // flipCard.addEventListener("click", event => {
 
 // })
+const card = document.getElementById("card")
+card.addEventListener("click", flipCard);
+function flipCard(e) {
+    card.classList.toggle("flip-card");
+}
 
 // on event 'click', switch from facedown to faceup, and possibly 
 // work in reverse- optional, when 2 cards are picked either flip back 
