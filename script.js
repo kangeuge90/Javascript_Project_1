@@ -4,23 +4,25 @@ let paused = false;
 let victory = false;
 let matchingPair = false;
 
+// flipCardEnable();
+
 const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
-        cardFlipActivator();
+        flipCardEnable();
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame1`);
     };
     if (document.getElementById('timer').innerText > '00:00:00:000' && paused === false) {
         pauseTimer();
-        cardFlipDeactivator();
+        flipCardDisable();
         paused = true;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame2`);
     } else if (document.getElementById('timer').innerText > '00:00:00:000' && paused === true) {
         startTimer();
-        cardFlipActivator();
+        flipCardEnable();
         paused = false;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame3`);
@@ -29,32 +31,29 @@ startGame.addEventListener("click", (event) => {
 
 // ^^May want startGame1 to set all cards facing down^^
 
-function cardFlipActivator() {
+function flipCardEnable() {
     let flipCard = document.querySelectorAll(".card");
     for (let i = 0; i < flipCard.length; i++) {
         flipCard[i].addEventListener("click", (event) => {
             event.currentTarget.classList.toggle("flip-card");
         })
-        console.log(`flipCard1`)
+        console.log(`flipCardEnable1`)
     }
 }
 
-function cardFlipDeactivator() {
+function flipCardDisable() {
     let flipCard = document.querySelectorAll(".card");
     for (let i = 0; i < flipCard.length; i++) {
         flipCard[i].addEventListener("click", (event) => {
             event.currentTarget.classList.toggle("flip-card");
         })
-        console.log(`flipCard1`)
+        console.log(`flipCardDisable1`)
     }
 }
 
 
-// ^^Must not be able to flip while game is paused, after game has begun^^
+// ^^Must not be able to flip while game is paused, after game has begun^^  *DONE*
 // ^^May set maximum of simultaeneous flipped cards to 2^^
-//SOLUTION:  
-// Need to adjust scope of function;
-// Should evaluate gamestate BEFORE adding/removing EventListener
 
 
 // ---------- TO DO AREA---------------------------------------------------------//
@@ -80,9 +79,11 @@ resetButton.addEventListener('click', (event) => {
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
 })
 
-const resetPlayArea = document.querySelectorAll(".card");
+function setCardsFacedown() {
+    const allcards = document.querySelectorAll(".card");
+}
 
-// function shuffle(array) {
+// function shuffleCards(array) {
 //     let currentIndex = array.length,
 //         randomIndex;
 

@@ -37,9 +37,14 @@ header {
 .objects {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: auto;
     padding: 0 0 25px 0;
-    width: 300px;
+    width: 310px;
+}
+
+button {
+    font-size: 75%;
 }
 
 .start {
@@ -53,7 +58,7 @@ header {
 }
 
 #timer {
-    width: 130px;
+    width: 110px;
 }
 
 .gameSection {
@@ -104,5 +109,8 @@ header {
     .foods {
         height: 720px;
         width: 765px;
+    }
+    button {
+        font-size: 100%;
     }
 }
