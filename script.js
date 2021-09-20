@@ -25,10 +25,18 @@ startGame.addEventListener("click", (event) => {
 // flipCard.addEventListener("click", event => {
 
 // })
-const card = document.getElementById("card")
-card.addEventListener("click", flipCard);
-function flipCard(e) {
-    card.classList.toggle("flip-card");
+
+// const card = document.getElementById("card")
+// card.addEventListener("click", flipCard);
+// function flipCard(e) {
+//     card.classList.toggle("flip-card");
+// }
+
+let flipCard = document.querySelectorAll(".card");
+for (let i = 0; i < flipCard.length; i++) {
+    flipCard[i].addEventListener("click", (event) => {
+        event.currentTarget.classList.toggle("flip-card");
+    })
 }
 
 // on event 'click', switch from facedown to faceup, and possibly 
