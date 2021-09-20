@@ -8,16 +8,19 @@ const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
+        cardFlipActivator();
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame1`);
     };
     if (document.getElementById('timer').innerText > '00:00:00:000' && paused === false) {
         pauseTimer();
+        cardFlipDeactivator();
         paused = true;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame2`);
     } else if (document.getElementById('timer').innerText > '00:00:00:000' && paused === true) {
         startTimer();
+        cardFlipActivator();
         paused = false;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame3`);
@@ -26,9 +29,8 @@ startGame.addEventListener("click", (event) => {
 
 // ^^May want startGame1 to set all cards facing down^^
 
-
-let flipCard = document.querySelectorAll(".card");
-if (started === false) {
+function cardFlipActivator() {
+    let flipCard = document.querySelectorAll(".card");
     for (let i = 0; i < flipCard.length; i++) {
         flipCard[i].addEventListener("click", (event) => {
             event.currentTarget.classList.toggle("flip-card");
@@ -36,25 +38,23 @@ if (started === false) {
         console.log(`flipCard1`)
     }
 }
-if (started === true && paused === false) {
+
+function cardFlipDeactivator() {
+    let flipCard = document.querySelectorAll(".card");
     for (let i = 0; i < flipCard.length; i++) {
         flipCard[i].addEventListener("click", (event) => {
             event.currentTarget.classList.toggle("flip-card");
         })
-        console.log(`flipCard2`)
-    }
-} else if (started === true && paused === true) {
-    for (let i = 0; i < flipCard.length; i++) {
-        flipCard[i].removeEventListener("click", (event) => {
-            event.currentTarget.classList.toggle("flip-card");
-        })
-        console.log(`flipCard3`)
+        console.log(`flipCard1`)
     }
 }
 
+
 // ^^Must not be able to flip while game is paused, after game has begun^^
 // ^^May set maximum of simultaeneous flipped cards to 2^^
-
+//SOLUTION:  
+// Need to adjust scope of function;
+// Should evaluate gamestate BEFORE adding/removing EventListener
 
 
 // ---------- TO DO AREA---------------------------------------------------------//
@@ -68,17 +68,19 @@ if (started === true && paused === false) {
 // 2. RESET/RANDOMIZE FXN ------------------------------------------------------//
 // Must set all cards facedown
 // Must shuffle food images
-// Must set timer to 0
-// Must set started=false, paused=false
+// Must set timer to 0                  *DONE*
+// Must set started=false, paused=false *DONE*
 
-const reset = document.querySelector(".reset");
-reset.addEventListener('click', (event) => {
+const resetButton = document.querySelector(".reset");
+resetButton.addEventListener('click', (event) => {
     started = false;
     paused = false;
     victory = false;
     resetTimer();
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
 })
+
+const resetPlayArea = document.querySelectorAll(".card");
 
 // function shuffle(array) {
 //     let currentIndex = array.length,
