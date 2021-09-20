@@ -81,7 +81,7 @@ header {
     transition: all 0.8s ease;
 }
 
-.front {
+.back {
     position: relative;
     top: 0;
     left: 0;
@@ -89,7 +89,7 @@ header {
     text-align: center;
 }
 
-.back {
+.front {
     position: absolute;
     top: 0;
     left: 0;
