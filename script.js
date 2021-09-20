@@ -1,76 +1,164 @@
 "use strict";
 let started = false;
 let paused = false;
-let matchingPair = false;
 let victory = false;
+let matchingPair = false;
 
 const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
         started = true;
+        console.log(`PAUSED=${paused}, STARTED=${started}, startGame1`);
     };
     if (document.getElementById('timer').innerText > '00:00:00:000' && paused === false) {
         pauseTimer();
         paused = true;
         started = true;
-        console.log(`${paused}2`);
+        console.log(`PAUSED=${paused}, STARTED=${started}, startGame2`);
     } else if (document.getElementById('timer').innerText > '00:00:00:000' && paused === true) {
         startTimer();
         paused = false;
         started = true;
-        console.log(`${paused}3`);
+        console.log(`PAUSED=${paused}, STARTED=${started}, startGame3`);
     };
 });
 
-// Must reset timer, then randomize cards(set facedown), and then start timer on every click
-// OR it can pause timer, and pause game (not allow flipCard to activate) and unpause upon reactivation
+// ^^May want startGame1 to set all cards facing down^^
 
-// const flipCard = document.getElementsByClassName("foods");
-// flipCard.addEventListener("click", event => {
 
-// })
-
-// const card = document.getElementById("card")
-// card.addEventListener("click", flipCard);
-// function flipCard(e) {
-//     card.classList.toggle("flip-card");
-// }
-
-const flipCard = document.querySelectorAll(".card");
+let flipCard = document.querySelectorAll(".card");
 if (started === false) {
     for (let i = 0; i < flipCard.length; i++) {
         flipCard[i].addEventListener("click", (event) => {
             event.currentTarget.classList.toggle("flip-card");
         })
+        console.log(`flipCard1`)
+    }
+}
+if (started === true && paused === false) {
+    for (let i = 0; i < flipCard.length; i++) {
+        flipCard[i].addEventListener("click", (event) => {
+            event.currentTarget.classList.toggle("flip-card");
+        })
+        console.log(`flipCard2`)
     }
 } else if (started === true && paused === true) {
     for (let i = 0; i < flipCard.length; i++) {
         flipCard[i].removeEventListener("click", (event) => {
             event.currentTarget.classList.toggle("flip-card");
         })
+        console.log(`flipCard3`)
     }
 }
 
-// on event 'click', switch from facedown to faceup, and possibly 
-// work in reverse- optional, when 2 cards are picked either flip back 
-// over if no match, or keep flipped if match
+// ^^Must not be able to flip while game is paused, after game has begun^^
+// ^^May set maximum of simultaeneous flipped cards to 2^^
 
-// Must remove cards if matched, after a short time
-// If cards do not match, must flip back to facedown after a short time
 
-// const randomize = document.getElementsByClassName("reset");
-// randomize.addEventListener('click', (event) => {
 
-// })
+// ---------- TO DO AREA---------------------------------------------------------//
+// 1.  MATCHINGPAIR ASSESSMENT fxn ----------------------------------------------//
+// If the last 2 cards clicked match, remove them after short time
+//      No longer flippable if matched
+// If the last 2 cards clicked do not match, flip them facing down after a short time
 
-// possible solution: assign each div a random #1-12 and assign them 1 of
-// 6 classes using math.random
-// Must also refresh the game, bring back all cards to facedown
 
-// OR possible make an array of 6 images, that can only be assigned a maximum 
-// of two times to each div
 
+// 2. RESET/RANDOMIZE FXN ------------------------------------------------------//
+// Must set all cards facedown
+// Must shuffle food images
+// Must set timer to 0
+// Must set started=false, paused=false
+
+const reset = document.querySelector(".reset");
+reset.addEventListener('click', (event) => {
+    started = false;
+    paused = false;
+    victory = false;
+    resetTimer();
+    console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
+})
+
+// function shuffle(array) {
+//     let currentIndex = array.length,
+//         randomIndex;
+
+//     // While there remain elements to shuffle...
+//     while (currentIndex != 0) {
+
+//         // Pick a remaining element...
+//         randomIndex = Math.floor(Math.random() * currentIndex);
+//         currentIndex--;
+
+//         // And swap it with the current element.
+//         [array[currentIndex], array[randomIndex]] = [
+//             array[randomIndex], array[currentIndex]
+//         ];
+//     }
+
+//     return array;
+// }
+
+
+// for (let card of cards) {
+//     let newdiv = document.createElement('div')
+//     newdiv.classList.add('')
+//     newdiv.src = cardImageArray
+// }
+
+
+
+
+
+// 3.  WIN CONDITION FXN ------------------------------------------------------//
+// If all cards matched, show victory prompt w/ time score
+// If # of matchingPair = 6 then show prompt
+
+
+// ---------- TO DO AREA END---------------------------------------------------//
+
+
+
+const cardImageArray = [{
+        image: "assets/Hamburger.jpg",
+    },
+    {
+        image: "assets/Hamburger.jpg",
+    },
+    {
+        image: "assets/Pizza.jpg",
+    },
+    {
+        image: "assets/Pizza.jpg",
+    },
+    {
+        image: "assets/Spaghetti.jpg",
+    },
+    {
+        image: "assets/Spaghetti.jpg",
+    },
+    {
+        image: "assets/Steak.jpg",
+    },
+    {
+        image: "assets/Steak.jpg",
+    },
+    {
+        image: "assets/Sushi.jpg",
+    },
+    {
+        image: "assets/Sushi.jpg",
+    },
+    {
+        image: "assets/Tacos.jpg",
+    },
+    {
+        image: "assets/Tacos.jpg",
+    },
+]
+
+// --------- TIMER AREA -----------//
 let hour = 0;
 let minute = 0;
 let second = 0;
@@ -99,7 +187,6 @@ function resetTimer() {
 }
 
 function timer() {
-    console.log('hello');
     if ((millisecond += 10) == 1000) {
         millisecond = 0;
         second++;
@@ -121,3 +208,5 @@ function timer() {
 function returnData(input) {
     return input > 10 ? input : `0${input}`
 }
+
+// --------- TIMER AREA END-----------//

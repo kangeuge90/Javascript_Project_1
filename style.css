@@ -16,12 +16,6 @@ body {
 }
 
 img {
-    /* height: 20vh;
-    min-height: 200px;
-    max-height: 300px;
-    width: 10vw;
-    min-width: 140px;
-    max-width: 210px; */
     height: 105px;
     width: 70px;
 }
@@ -37,11 +31,12 @@ header {
     display: flex;
     justify-content: center;
     width: 100vw;
+    position: relative;
 }
 
 .objects {
     display: flex;
-    /* justify-content: center; */
+    justify-content: space-between;
     margin: auto;
     padding: 0 0 25px 0;
     width: 300px;
@@ -49,27 +44,26 @@ header {
 
 .start {
     border-radius: 10%;
-    width: 65px;
     margin: 0 25px;
 }
 
 .reset {
     border-radius: 10%;
-    width: 65px;
     margin: 0 25px;
+}
+
+#timer {
+    width: 130px;
 }
 
 .gameSection {
     display: flex;
     justify-content: center;
-    /* height: 470px;
-    width: 315px; */
 }
 
 .foods {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
     justify-content: space-between;
     height: 350px;
     width: 315px;
@@ -82,14 +76,6 @@ header {
 }
 
 .front {
-    position: relative;
-    top: 0;
-    left: 0;
-    backface-visibility: hidden;
-    text-align: center;
-}
-
-.back {
     position: absolute;
     top: 0;
     left: 0;
@@ -98,16 +84,20 @@ header {
     transform: rotateY(180deg);
 }
 
+.back {
+    position: relative;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    text-align: center;
+}
+
 .flip-card {
     transform: rotateY(180deg);
 }
 
 @media only screen and (min-width:768px) {
     img {
-        /* min-height: 200px;
-        max-height: 300px;
-        min-width: 140px;
-        max-width: 210px; */
         height: 220px;
         width: 170px;
     }
@@ -116,39 +106,3 @@ header {
         width: 765px;
     }
 }
-
-
-/* #hamburger {
-    background-image: Hamburger.jpg;
-
-}
-
-#pizza {
-   background-image: Pizza.jpg;
-}
-
-#spaghetti {
-background-image: Spaghetti.jpg;
-}
-
-#steak {
-background-image: Steak.jpg;
-}
-
-#sushi {
-background-image: Sushi.jpg;
-}
-
-#tacos {
-background-image: Tacos.jpg;
-} */
-
-
-/* 
-.facedown {
-
-}
-
-.faceup {
-
-} */
