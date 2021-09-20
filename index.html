@@ -14,16 +14,16 @@
 </head>
 
 <body>
-    <div id='grad'>
-        <header>
-            <h1>Food Matching Game</h1>
-        </header>
-        <main>
-            <div class='objects'>
-                <input class="start" type="submit" value="Start">
-                <div id="timer"> <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span></div>
-                <input class="reset" type="submit" value="Reset">
-            </div>
+    <header>
+        <h1>Food Matching Game</h1>
+    </header>
+    <main>
+        <div class='objects'>
+            <input class="start" type="submit" value="Start">
+            <div id="timer"> <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span></div>
+            <input class="reset" type="submit" value="Reset">
+        </div>
+        <section class="gameSection">
             <nav class="foods">
                 <div class="card">
                     <div class="front"><img class="faceup" src="assets/Tacos.jpg"></div>
@@ -74,8 +74,9 @@
                     <div class="back"><img class="facedown" src="assets/cardBackPan.jpg"></div>
                 </div>
             </nav>
-        </main>
-    </div>
+        </section>
+    </main>
     <script src="script.js" async defer></script>
 </body>
+
 </html>

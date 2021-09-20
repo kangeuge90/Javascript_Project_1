@@ -9,20 +9,21 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-#grad {
-    height: 100vh;
+body {
+    height: 120vh;
     width: 100vw;
     background-image: linear-gradient(to bottom left, #0067b3, #40b0df, #ffd53d, #ffff02);
 }
 
 img {
-    /* border-style: solid 25px black; -not working atm */
-    height: 20vh;
+    /* height: 20vh;
     min-height: 200px;
     max-height: 300px;
     width: 10vw;
     min-width: 140px;
-    max-width: 210px;
+    max-width: 210px; */
+    height: 105px;
+    width: 70px;
 }
 
 header {
@@ -32,11 +33,17 @@ header {
     text-align: center;
 }
 
-.objects {
+.objectsContainer {
     display: flex;
     justify-content: center;
+}
+
+.objects {
+    display: flex;
+    /* justify-content: center; */
     margin: auto;
     padding: 0 0 25px 0;
+    width: 300px;
 }
 
 .start {
@@ -51,15 +58,27 @@ header {
     margin: 0 25px;
 }
 
-.foods {
-    display: flex;  
-    flex-wrap: wrap;
+.gameSection {
+    display: flex;
+    justify-content: center;
+    /* height: 470px;
+    width: 315px; */
 }
+
+.foods {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    height: 470px;
+    width: 315px;
+}
+
 .card {
     position: relative;
     transform-style: preserve-3d;
     transition: all 0.8s ease;
 }
+
 .front {
     position: relative;
     top: 0;
@@ -67,6 +86,7 @@ header {
     backface-visibility: hidden;
     text-align: center;
 }
+
 .back {
     position: absolute;
     top: 0;
@@ -75,16 +95,23 @@ header {
     text-align: center;
     transform: rotateY(180deg);
 }
+
 .flip-card {
     transform: rotateY(180deg);
 }
 
 @media only screen and (min-width:768px) {
     img {
-        min-height: 200px;
+        /* min-height: 200px;
         max-height: 300px;
         min-width: 140px;
-        max-width: 210px;
+        max-width: 210px; */
+        height: 220px;
+        width: 170px;
+    }
+    .foods {
+        height: 990px;
+        width: 765px;
     }
 }
 

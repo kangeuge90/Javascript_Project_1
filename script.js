@@ -1,19 +1,24 @@
 "use strict";
+let started = false;
 let paused = false;
+let matchingPair = false;
+let victory = false;
 
 const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
-        console.log(`${paused}1`);
+        started = true;
     };
     if (document.getElementById('timer').innerText > '00:00:00:000' && paused === false) {
         pauseTimer();
         paused = true;
+        started = true;
         console.log(`${paused}2`);
     } else if (document.getElementById('timer').innerText > '00:00:00:000' && paused === true) {
         startTimer();
         paused = false;
+        started = true;
         console.log(`${paused}3`);
     };
 });
@@ -32,11 +37,19 @@ startGame.addEventListener("click", (event) => {
 //     card.classList.toggle("flip-card");
 // }
 
-let flipCard = document.querySelectorAll(".card");
-for (let i = 0; i < flipCard.length; i++) {
-    flipCard[i].addEventListener("click", (event) => {
-        event.currentTarget.classList.toggle("flip-card");
-    })
+const flipCard = document.querySelectorAll(".card");
+if (started === false) {
+    for (let i = 0; i < flipCard.length; i++) {
+        flipCard[i].addEventListener("click", (event) => {
+            event.currentTarget.classList.toggle("flip-card");
+        })
+    }
+} else if (started === true && paused === true) {
+    for (let i = 0; i < flipCard.length; i++) {
+        flipCard[i].removeEventListener("click", (event) => {
+            event.currentTarget.classList.toggle("flip-card");
+        })
+    }
 }
 
 // on event 'click', switch from facedown to faceup, and possibly 
