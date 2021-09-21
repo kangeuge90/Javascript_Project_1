@@ -143,6 +143,7 @@ function resetBoard() { // resets stored-card clicks and unlocks board
 
 const resetButton = document.querySelector(".reset");
 resetButton.addEventListener('click', (event) => {
+    cardmatched = 0;
     started = false;
     paused = false;
     victory = false;
