@@ -64,9 +64,9 @@ function flipCard() {
 
 // ---------- TO DO AREA---------------------------------------------------------//
 // 1.  MATCHINGPAIR ASSESSMENT fxn ----------------------------------------------//
-// If the last 2 cards clicked match, remove them after short time      *DONE*
-//      No longer flippable if matched  *DONE*
-// If the last 2 cards clicked do not match, flip them facing down after a short time      *DONE*
+// If the last 2 cards clicked match, remove them after short time
+//      No longer flippable if matched
+// If the last 2 cards clicked do not match, flip them facing down after a short time
 
 function assessMatch() {
     if (firstCard.dataset.framework === secondCard.dataset.framework) {
@@ -111,22 +111,18 @@ function resetBoard() {
 
 // 2. RESET/RANDOMIZE FXN ------------------------------------------------------//
 // Must refresh board                   *DONE*
-// Must shuffle food images             *DONE*
+// Must shuffle food images
 // Must set timer to 0                  *DONE*
 // Must set started=false, paused=false *DONE*
-// Fixes:
-// cards stop being able to be flipped after reset button pressed
 
 const resetButton = document.querySelector(".reset");
 resetButton.addEventListener('click', (event) => {
     started = false;
     paused = false;
     victory = false;
-    lockedBoard = false;
     reappearCards();
     setCardsFacedown();
-    manualShuffleCards();
-    // resetBoard();
+    resetBoard();
     resetTimer();
     pauseTimer();
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
@@ -135,33 +131,18 @@ resetButton.addEventListener('click', (event) => {
 function setCardsFacedown() {
     cards.forEach(card => card.classList.remove('flip-card'));
 }
-(function autoShuffleCards() {
+(function shuffleCards() {
     cards.forEach(card => {
         let randomOrder = Math.floor(Math.random() * 12);
         card.style.order = randomOrder;
     });
 })();
 
-function manualShuffleCards() {
-    cards.forEach(card => {
-        let randomOrder = Math.floor(Math.random() * 12);
-        card.style.order = randomOrder;
-    });
-}
-
 
 
 // 3.  WIN CONDITION FXN ------------------------------------------------------//
-// Assess victory condition
-// Show Victory Prompt
-
-function victoryScreen() {
-
-}
-
-function victoryAssess() {
-
-}
+// If all cards matched, show victory prompt w/ time score
+// If # of matchingPair = 6 then show prompt
 
 
 // ---------- TO DO AREA END---------------------------------------------------//

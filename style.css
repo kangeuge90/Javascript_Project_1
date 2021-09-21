@@ -78,7 +78,7 @@ button {
     position: relative;
     transform-style: preserve-3d;
     transition: all 0.8s ease;
-    visibility: visible;
+    /* visibility: visible; */
 }
 
 
