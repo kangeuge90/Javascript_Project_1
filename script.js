@@ -5,7 +5,7 @@ let matchingPair = false;
 let victory = false;
 
 const startGame = document.querySelector(".start");
-startGame.addEventListener("click", (event) => {
+startGame.addEventListener("click", () => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
         started = true;
@@ -76,13 +76,6 @@ const shuffle = () => {
 };
 shuffle();
 
-// Must reset timer, then randomize cards(set facedown), and then start timer on every click
-// OR it can pause timer, and pause game (not allow flipCard to activate) and unpause upon reactivation
-
-// const flipCard = document.getElementsByClassName("foods");
-// flipCard.addEventListener("click", event => {
-
-// })
 let cardOne = null;
 let cardTwo = null;
 
@@ -117,36 +110,22 @@ function flipCard(e) {
     }, 500)
     }
 }
-
 const cards = document.querySelectorAll(".card");
+let addEvent = () => {
 if (started === false) {
     for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", flipCard)
     }
 } else if (started === true && paused === true) {
-    for (let i = 0; i < cards.length; i++) {
-       cards[i].removeEventListener("click", flipCard)
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].removeEventListener("click", flipCard)
+        }
     }
 }
-
-// on event 'click', switch from facedown to faceup, and possibly 
-// work in reverse- optional, when 2 cards are picked either flip back 
-// over if no match, or keep flipped if match
-
-// Must remove cards if matched, after a short time
-// If cards do not match, must flip back to facedown after a short time
-
-// const randomize = document.getElementsByClassName("reset");
-// randomize.addEventListener('click', (event) => {
-
-// })
-
-// possible solution: assign each div a random #1-12 and assign them 1 of
-// 6 classes using math.random
-// Must also refresh the game, bring back all cards to facedown
-
-// OR possible make an array of 6 images, that can only be assigned a maximum 
-// of two times to each div     
+const resetGame = document.querySelector(".reset");
+resetGame.addEventListener("click", () => {
+    location.reload();
+});
 
 let hour = 0;
 let minute = 0;
