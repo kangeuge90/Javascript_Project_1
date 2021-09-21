@@ -7,6 +7,7 @@ const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
+        paused = false;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame1`);
     };
@@ -36,9 +37,9 @@ let lockedBoard = false;
 function flipCard() {
     if (lockedBoard) return;
     if (this === firstCard) return;
-    if (started === false) {
-        console.log('flipCard1');
-    }
+    // if (started === false) {
+    //     console.log('flipCard1');
+    // }
     if (started === true && paused === false) {
         this.classList.add('flip-card');
         if (!hasFlipped) {
@@ -51,11 +52,11 @@ function flipCard() {
         }
         console.log('flipCard2');
     }
-    if (victory === true && paused == false) {
-        console.log('flipCard3');
-    } else if (started === true && paused === true) {
-        console.log('flipCard4');
-    }
+    // if (victory === true && paused == false) {
+    //     console.log('flipCard3');
+    // } else if (started === true && paused === true) {
+    //     console.log('flipCard4');
+    // }
 }
 
 // ^^Must not be able to flip while game is paused, after game has begun^^  *DONE*
@@ -84,6 +85,10 @@ function disableCards() {
     }, 500)
 }
 
+function enableCards() {
+    cards.forEach(card => card.addEventListener('click', flipCard))
+}
+
 function unflipCards() {
     lockedBoard = true;
     setTimeout(() => {
@@ -110,8 +115,8 @@ function resetBoard() {
 
 
 // 2. RESET/RANDOMIZE FXN ------------------------------------------------------//
-// Must refresh board                   *DONE*
-// Must shuffle food images
+// Must refresh board                   
+// Must shuffle food images             *DONE*
 // Must set timer to 0                  *DONE*
 // Must set started=false, paused=false *DONE*
 
@@ -121,8 +126,10 @@ resetButton.addEventListener('click', (event) => {
     paused = false;
     victory = false;
     reappearCards();
+    shuffleCards();
     setCardsFacedown();
     resetBoard();
+    enableCards();
     resetTimer();
     pauseTimer();
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
@@ -131,12 +138,13 @@ resetButton.addEventListener('click', (event) => {
 function setCardsFacedown() {
     cards.forEach(card => card.classList.remove('flip-card'));
 }
-(function shuffleCards() {
+
+function shuffleCards() {
     cards.forEach(card => {
         let randomOrder = Math.floor(Math.random() * 12);
         card.style.order = randomOrder;
     });
-})();
+}
 
 
 
