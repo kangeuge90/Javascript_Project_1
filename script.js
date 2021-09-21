@@ -2,14 +2,18 @@
 let started = false;
 let paused = false;
 let victory = false;
+const cards = document.querySelectorAll('.card')
+cards.forEach(card => card.addEventListener('click', flipCard));
+
+shuffleCards(); // auto shuffles when page loads
 
 const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
-        reappearCards(); // cards no longer invisible//
+        reappearAllCards(); // cards no longer invisible//
         setCardsFacedown(); // cards set face down//
         resetBoard(); // lockBoard state and card-clicked memory cleared//
-        enableCards(); // re-add 'click' event listeners//
+        enableAllCards(); // re-add 'click' event listeners to All Cards//
         startTimer();
         paused = false;
         started = true;
@@ -28,8 +32,6 @@ startGame.addEventListener("click", (event) => {
     };
 });
 
-const cards = document.querySelectorAll('.card')
-cards.forEach(card => card.addEventListener('click', flipCard));
 
 let hasFlipped = false;
 let firstCard = null;
@@ -37,8 +39,8 @@ let secondCard = null;
 let lockedBoard = false;
 
 function flipCard() {
-    if (lockedBoard) return;
-    if (this === firstCard) return;
+    if (lockedBoard) return; // if lockedBoard=true due to unflipCards function, flipping is restricted
+    if (this === firstCard) return; // if target is the same as the firstCard, flipping that same card is restricted
     if (started === false) {
         this.classList.add('flip-card');
         if (!hasFlipped) {
@@ -79,7 +81,7 @@ function flipCard() {
 //      No longer flippable if matched
 // If the last 2 cards clicked do not match, flip them facing down after a short time
 
-function assessMatch() {
+function assessMatch() { // Checks if clicked pair are matching, and acts accordingly
     if (firstCard.dataset.framework === secondCard.dataset.framework) {
         disableCards();
     } else {
@@ -87,7 +89,7 @@ function assessMatch() {
     }
 }
 
-function disableCards() {
+function disableCards() { // disables matched pair
     setTimeout(() => {
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
@@ -95,11 +97,11 @@ function disableCards() {
     }, 500)
 }
 
-function enableCards() {
+function enableAllCards() { // enables all cards to flip again (used for new game and reset)
     cards.forEach(card => card.addEventListener('click', flipCard))
 }
 
-function unflipCards() {
+function unflipCards() { // unflips incorrectly matched pair
     lockedBoard = true;
     setTimeout(() => {
         firstCard.classList.remove('flip-card');
@@ -108,16 +110,16 @@ function unflipCards() {
     }, 750)
 }
 
-function disappearCards() {
+function disappearCards() { // makes matched pair image disappear
     firstCard.style.visibility = "hidden";
     secondCard.style.visibility = "hidden";
 }
 
-function reappearCards() {
+function reappearAllCards() { // makes all cards reappear (new game and reset)
     cards.forEach(card => card.style.visibility = "visible");
 }
 
-function resetBoard() {
+function resetBoard() { // resets stored-card clicks and unlocks board
     hasFlipped = false;
     lockedBoard = false;
     [firstCard, secondCard] = [null, null];
@@ -135,21 +137,21 @@ resetButton.addEventListener('click', (event) => {
     started = false;
     paused = false;
     victory = false;
-    reappearCards(); // cards no longer invisible//
+    reappearAllCards(); // cards no longer invisible//
     setCardsFacedown(); // cards set face down//
     resetBoard(); // lockBoard state and card-clicked memory cleared//
-    enableCards(); // re-add 'click' event listeners//
+    enableAllCards(); // re-add 'click' event listeners//
     shuffleCards(); // cards shuffled//
     resetTimer(); // set timer to 00's//
     pauseTimer(); // pause timer (at 00's)//
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
 })
 
-function setCardsFacedown() {
+function setCardsFacedown() { // sets all cards facing down (new game and reset)
     cards.forEach(card => card.classList.remove('flip-card'));
 }
 
-function shuffleCards() {
+function shuffleCards() { // shuffles cards
     cards.forEach(card => {
         let randomOrder = Math.floor(Math.random() * 12);
         card.style.order = randomOrder;
@@ -159,8 +161,25 @@ function shuffleCards() {
 
 
 // 3.  WIN CONDITION FXN ------------------------------------------------------//
-// If 
 
+function assessWinCondition() { // checks if win condition has been met
+    if (cards.forEach(card => card.classList.length('flip-card')) == 12) {
+        console.log('winCondition1')
+    }
+}
+
+function autoWin() { // create automatic win state for console testing purposes
+    cards.forEach(card => card.classList.add('flip-card'));
+    winScreen();
+    console.log('autoWin');
+}
+
+function winScreen() {
+    prompt(`Congratulations!!!  You've completed the Food Matching Game in ${document.getElementById('hour').innerText} hours, `
+        `${document.getElementById('minute').innerText} minutes, `
+        `${document.getElementById('second').innerText} seconds, `
+        `and ${document.getElementById('millisecond').innerText} milliseconds.  GREAT JOB!!!`)
+}
 
 // ---------- TO DO AREA END---------------------------------------------------//
 
