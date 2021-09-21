@@ -2,27 +2,21 @@
 let started = false;
 let paused = false;
 let victory = false;
-let matchingPair = false;
-
-// flipCardEnable();
 
 const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
         startTimer();
-        flipCardEnable();
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame1`);
     };
     if (document.getElementById('timer').innerText > '00:00:00:000' && paused === false) {
         pauseTimer();
-        flipCardDisable();
         paused = true;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame2`);
     } else if (document.getElementById('timer').innerText > '00:00:00:000' && paused === true) {
         startTimer();
-        flipCardEnable();
         paused = false;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame3`);
@@ -31,26 +25,38 @@ startGame.addEventListener("click", (event) => {
 
 // ^^May want startGame1 to set all cards facing down^^
 
-function flipCardEnable() {
-    let flipCard = document.querySelectorAll(".card");
-    for (let i = 0; i < flipCard.length; i++) {
-        flipCard[i].addEventListener("click", (event) => {
-            event.currentTarget.classList.toggle("flip-card");
-        })
-        console.log(`flipCardEnable1`)
+const cards = document.querySelectorAll('.card')
+cards.forEach(card => card.addEventListener('click', flipCard));
+
+let hasFlipped = false;
+let firstCard;
+let secondCard;
+let lockedBoard = false;
+
+function flipCard() {
+    if (lockedBoard) return;
+    if (this === firstCard) return;
+    if (started === false) {
+        console.log('flipCard1');
+    }
+    if (started === true && paused === false) {
+        this.classList.add('flip-card');
+        if (!hasFlipped) {
+            hasFlipped = true;
+            firstCard = this;
+        } else {
+            hasFlipped = false;
+            secondCard = this;
+            assessMatch();
+        }
+        console.log('flipCard2');
+    }
+    if (victory === true && paused == false) {
+        console.log('flipCard3');
+    } else if (started === true && paused === true) {
+        console.log('flipCard4');
     }
 }
-
-function flipCardDisable() {
-    let flipCard = document.querySelectorAll(".card");
-    for (let i = 0; i < flipCard.length; i++) {
-        flipCard[i].addEventListener("click", (event) => {
-            event.currentTarget.classList.toggle("flip-card");
-        })
-        console.log(`flipCardDisable1`)
-    }
-}
-
 
 // ^^Must not be able to flip while game is paused, after game has begun^^  *DONE*
 // ^^May set maximum of simultaeneous flipped cards to 2^^
@@ -58,108 +64,109 @@ function flipCardDisable() {
 
 // ---------- TO DO AREA---------------------------------------------------------//
 // 1.  MATCHINGPAIR ASSESSMENT fxn ----------------------------------------------//
-// If the last 2 cards clicked match, remove them after short time
-//      No longer flippable if matched
-// If the last 2 cards clicked do not match, flip them facing down after a short time
+// If the last 2 cards clicked match, remove them after short time      *DONE*
+//      No longer flippable if matched  *DONE*
+// If the last 2 cards clicked do not match, flip them facing down after a short time      *DONE*
 
+function assessMatch() {
+    if (firstCard.dataset.framework === secondCard.dataset.framework) {
+        disableCards();
+    } else {
+        unflipCards();
+    }
+}
+
+function disableCards() {
+    setTimeout(() => {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+        disappearCards();
+    }, 500)
+}
+
+function unflipCards() {
+    lockedBoard = true;
+    setTimeout(() => {
+        firstCard.classList.remove('flip-card');
+        secondCard.classList.remove('flip-card');
+        lockedBoard = false;
+    }, 750)
+}
+
+function disappearCards() {
+    firstCard.style.visibility = "hidden";
+    secondCard.style.visibility = "hidden";
+}
+
+function reappearCards() {
+    cards.forEach(card => card.style.visibility = "visible");
+}
+
+function resetBoard() {
+    hasFlipped = false;
+    lockedBoard = false;
+    [firstCard, secondCard] = [null, null];
+}
 
 
 // 2. RESET/RANDOMIZE FXN ------------------------------------------------------//
-// Must set all cards facedown
-// Must shuffle food images
+// Must refresh board                   *DONE*
+// Must shuffle food images             *DONE*
 // Must set timer to 0                  *DONE*
 // Must set started=false, paused=false *DONE*
+// Fixes:
+// cards stop being able to be flipped after reset button pressed
 
 const resetButton = document.querySelector(".reset");
 resetButton.addEventListener('click', (event) => {
     started = false;
     paused = false;
     victory = false;
+    lockedBoard = false;
+    reappearCards();
+    setCardsFacedown();
+    manualShuffleCards();
+    // resetBoard();
     resetTimer();
+    pauseTimer();
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
 })
 
 function setCardsFacedown() {
-    const allcards = document.querySelectorAll(".card");
+    cards.forEach(card => card.classList.remove('flip-card'));
 }
+(function autoShuffleCards() {
+    cards.forEach(card => {
+        let randomOrder = Math.floor(Math.random() * 12);
+        card.style.order = randomOrder;
+    });
+})();
 
-// function shuffleCards(array) {
-//     let currentIndex = array.length,
-//         randomIndex;
-
-//     // While there remain elements to shuffle...
-//     while (currentIndex != 0) {
-
-//         // Pick a remaining element...
-//         randomIndex = Math.floor(Math.random() * currentIndex);
-//         currentIndex--;
-
-//         // And swap it with the current element.
-//         [array[currentIndex], array[randomIndex]] = [
-//             array[randomIndex], array[currentIndex]
-//         ];
-//     }
-
-//     return array;
-// }
-
-
-// for (let card of cards) {
-//     let newdiv = document.createElement('div')
-//     newdiv.classList.add('')
-//     newdiv.src = cardImageArray
-// }
-
-
+function manualShuffleCards() {
+    cards.forEach(card => {
+        let randomOrder = Math.floor(Math.random() * 12);
+        card.style.order = randomOrder;
+    });
+}
 
 
 
 // 3.  WIN CONDITION FXN ------------------------------------------------------//
-// If all cards matched, show victory prompt w/ time score
-// If # of matchingPair = 6 then show prompt
+// Assess victory condition
+// Show Victory Prompt
+
+function victoryScreen() {
+
+}
+
+function victoryAssess() {
+
+}
 
 
 // ---------- TO DO AREA END---------------------------------------------------//
 
 
-
-const cardImageArray = [{
-        image: "assets/Hamburger.jpg",
-    },
-    {
-        image: "assets/Hamburger.jpg",
-    },
-    {
-        image: "assets/Pizza.jpg",
-    },
-    {
-        image: "assets/Pizza.jpg",
-    },
-    {
-        image: "assets/Spaghetti.jpg",
-    },
-    {
-        image: "assets/Spaghetti.jpg",
-    },
-    {
-        image: "assets/Steak.jpg",
-    },
-    {
-        image: "assets/Steak.jpg",
-    },
-    {
-        image: "assets/Sushi.jpg",
-    },
-    {
-        image: "assets/Sushi.jpg",
-    },
-    {
-        image: "assets/Tacos.jpg",
-    },
-    {
-        image: "assets/Tacos.jpg",
-    },
-]
 
 // --------- TIMER AREA -----------//
 let hour = 0;

@@ -44,7 +44,7 @@ header {
 }
 
 button {
-    font-size: 75%;
+    font-size: 60%;
 }
 
 .start {
@@ -78,9 +78,37 @@ button {
     position: relative;
     transform-style: preserve-3d;
     transition: all 0.8s ease;
+    visibility: visible;
+}
+
+
+/*  FACE UP ------------------*/
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    text-align: center;
+    transform: rotateY(180deg);
 }
 
 .front {
+    position: relative;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    text-align: center;
+}
+
+
+/* FACE UP END----------------- */
+
+
+/* FACE DOWN --------------*/
+
+
+/* .front {
     position: absolute;
     top: 0;
     left: 0;
@@ -95,7 +123,10 @@ button {
     left: 0;
     backface-visibility: hidden;
     text-align: center;
-}
+} */
+
+
+/* FACE DOWN END -------------------*/
 
 .flip-card {
     transform: rotateY(180deg);
@@ -109,6 +140,9 @@ button {
     .foods {
         height: 720px;
         width: 765px;
+    }
+    .objects {
+        width: 700px;
     }
     button {
         font-size: 100%;
