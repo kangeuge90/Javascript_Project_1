@@ -23,6 +23,59 @@ startGame.addEventListener("click", (event) => {
     };
 });
 
+// creating array for randomizing
+// board/cards or shuffle option
+const shuffle = () => {
+    let cardOptions = [
+        "Hamburger",
+        "Hamburger",
+        "Pizza",
+        "Pizza",
+        "Spaghetti",
+        "Spaghetti",
+        "Steak",
+        "Steak",
+        "Sushi",
+        "Sushi",
+        "Tacos",
+        "Tacos"
+    ]
+    for (let i = 0; i < 12; i++) {
+        // get random food from array
+        // and remove it to stop repeats
+        let index = Math.floor(Math.random() * cardOptions.length);
+        let cardOption = cardOptions[index];
+        cardOptions.splice(index, 1);
+        // create card div
+        // adding class/dataset
+        let div = document.createElement("div");
+        div.classList.add("card");
+        div.dataset.food = cardOption;
+        // adding image to front div
+        let frontImage = document.createElement("img");
+        frontImage.setAttribute("src", `assets/${cardOption}.jpg`);
+        frontImage.setAttribute("alt", cardOption);
+        frontImage.classList.add("faceup");
+        let frontDiv = document.createElement("div");
+        frontDiv.classList.add("front");
+        frontDiv.appendChild(frontImage);
+        // adding image to back div
+        let backImage = document.createElement("img");
+        backImage.setAttribute("src", "assets/cardBackPan.jpg");
+        backImage.setAttribute("alt", "Card");
+        backImage.classList.add("facedown");
+        let backDiv = document.createElement("div");
+        backDiv.classList.add("back");
+        backDiv.appendChild(backImage);
+        // adding div to foods, etc
+        div.appendChild(frontDiv);
+        div.appendChild(backDiv);
+        document.querySelector(".foods").appendChild(div);
+        // adding image to back div
+    }
+};
+shuffle();
+
 // Must reset timer, then randomize cards(set facedown), and then start timer on every click
 // OR it can pause timer, and pause game (not allow flipCard to activate) and unpause upon reactivation
 
@@ -39,6 +92,7 @@ function flipCard(e) {
     e.currentTarget.classList.toggle("flip-card");
         if (cardOne === null) {
         cardOne = e.currentTarget;
+        cardOne.removeEventListener("click", flipCard);
     } else {
         cardTwo = e.currentTarget;
         // check to see if it's a match
@@ -53,11 +107,11 @@ function flipCard(e) {
         if (cardOneFood === cardTwoFood) {
            cardOne.style.visibility="hidden";
            cardTwo.style.visibility="hidden";
-
         } else {
            cardOne.classList.remove("flip-card");
            cardTwo.classList.remove("flip-card");
         }
+        cardOne.addEventListener("click", flipCard);
         cardOne = null;
         cardTwo = null;
     }, 500)
