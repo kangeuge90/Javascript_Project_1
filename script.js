@@ -83,7 +83,7 @@ let cardMatched = 0;
 // card.addEventListener("click", flipCard);
 function flipCard(e) {
     e.currentTarget.classList.toggle("flip-card");
-        if (cardOne === null) {
+    if (cardOne === null) {
         cardOne = e.currentTarget;
         cardOne.removeEventListener("click", flipCard);
     } else {
@@ -97,31 +97,33 @@ function flipCard(e) {
         let cardOneFood = cardOne.dataset.food;
         let cardTwoFood = cardTwo.dataset.food;
         setTimeout(() => {
-        if (cardOneFood === cardTwoFood) {
-           cardOne.style.visibility="hidden";
-           cardTwo.style.visibility="hidden";
-           cardMatched++
-           if (cardMatched === 6) {
-               pauseTimer();
-               alert("Congratulations! Game complete!");
-           }
-        } else {
-           cardOne.classList.remove("flip-card");
-           cardTwo.classList.remove("flip-card");
-        }
-        cardOne.addEventListener("click", flipCard);
-        cardOne = null;
-        cardTwo = null;
-    }, 500)
+            if (cardOneFood === cardTwoFood) {
+                cardOne.style.visibility = "hidden";
+                cardTwo.style.visibility = "hidden";
+                cardMatched++
+                if (cardMatched === 6) {
+                    let currentTime = document.getElementById('timer').innerText;
+
+                    pauseTimer();
+                    alert(`Congratulations! Game completed in ${currentTime}!`);
+                }
+            } else {
+                cardOne.classList.remove("flip-card");
+                cardTwo.classList.remove("flip-card");
+            }
+            cardOne.addEventListener("click", flipCard);
+            cardOne = null;
+            cardTwo = null;
+        }, 500)
     }
 }
 const cards = document.querySelectorAll(".card");
 let addEvent = () => {
-if (started === false) {
-    for (let i = 0; i < cards.length; i++) {
-        cards[i].addEventListener("click", flipCard)
-    }
-} else if (started === true && paused === true) {
+    if (started === false) {
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].addEventListener("click", flipCard)
+        }
+    } else if (started === true && paused === true) {
         for (let i = 0; i < cards.length; i++) {
             cards[i].removeEventListener("click", flipCard)
         }
@@ -151,7 +153,7 @@ function pauseTimer() {
     clearInterval(cron);
     for (let i = 0; i < cards.length; i++) {
         cards[i].removeEventListener("click", flipCard)
-     }
+    }
 }
 
 function resetTimer() {
