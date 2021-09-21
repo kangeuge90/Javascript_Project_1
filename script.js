@@ -78,7 +78,7 @@ shuffle();
 
 let cardOne = null;
 let cardTwo = null;
-
+let cardMatched = 0;
 // const card = document.getElementById("card")
 // card.addEventListener("click", flipCard);
 function flipCard(e) {
@@ -100,6 +100,11 @@ function flipCard(e) {
         if (cardOneFood === cardTwoFood) {
            cardOne.style.visibility="hidden";
            cardTwo.style.visibility="hidden";
+           cardMatched++
+           if (cardMatched === 6) {
+               pauseTimer();
+               alert("Congratulations! Game complete!");
+           }
         } else {
            cardOne.classList.remove("flip-card");
            cardTwo.classList.remove("flip-card");
