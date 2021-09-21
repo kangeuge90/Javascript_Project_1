@@ -6,6 +6,10 @@ let victory = false;
 const startGame = document.querySelector(".start");
 startGame.addEventListener("click", (event) => {
     if (document.getElementById('timer').innerText == '00:00:00:000') {
+        reappearCards(); // cards no longer invisible//
+        setCardsFacedown(); // cards set face down//
+        resetBoard(); // lockBoard state and card-clicked memory cleared//
+        enableCards(); // re-add 'click' event listeners//
         startTimer();
         paused = false;
         started = true;
@@ -24,22 +28,29 @@ startGame.addEventListener("click", (event) => {
     };
 });
 
-// ^^May want startGame1 to set all cards facing down^^
-
 const cards = document.querySelectorAll('.card')
 cards.forEach(card => card.addEventListener('click', flipCard));
 
 let hasFlipped = false;
-let firstCard;
-let secondCard;
+let firstCard = null;
+let secondCard = null;
 let lockedBoard = false;
 
 function flipCard() {
     if (lockedBoard) return;
     if (this === firstCard) return;
-    // if (started === false) {
-    //     console.log('flipCard1');
-    // }
+    if (started === false) {
+        this.classList.add('flip-card');
+        if (!hasFlipped) {
+            hasFlipped = true;
+            firstCard = this;
+        } else {
+            hasFlipped = false;
+            secondCard = this;
+            assessMatch();
+        }
+        console.log('flipCard1');
+    }
     if (started === true && paused === false) {
         this.classList.add('flip-card');
         if (!hasFlipped) {
@@ -52,14 +63,13 @@ function flipCard() {
         }
         console.log('flipCard2');
     }
-    // if (victory === true && paused == false) {
-    //     console.log('flipCard3');
-    // } else if (started === true && paused === true) {
-    //     console.log('flipCard4');
-    // }
+    if (victory === true && paused == false) {
+        console.log('flipCard3');
+    } else if (started === true && paused === true) {
+        console.log('flipCard4');
+    }
 }
 
-// ^^Must not be able to flip while game is paused, after game has begun^^  *DONE*
 // ^^May set maximum of simultaeneous flipped cards to 2^^
 
 
@@ -115,7 +125,7 @@ function resetBoard() {
 
 
 // 2. RESET/RANDOMIZE FXN ------------------------------------------------------//
-// Must refresh board                   
+// Must refresh board                   *DONE*
 // Must shuffle food images             *DONE*
 // Must set timer to 0                  *DONE*
 // Must set started=false, paused=false *DONE*
@@ -125,13 +135,13 @@ resetButton.addEventListener('click', (event) => {
     started = false;
     paused = false;
     victory = false;
-    reappearCards();
-    shuffleCards();
-    setCardsFacedown();
-    resetBoard();
-    enableCards();
-    resetTimer();
-    pauseTimer();
+    reappearCards(); // cards no longer invisible//
+    setCardsFacedown(); // cards set face down//
+    resetBoard(); // lockBoard state and card-clicked memory cleared//
+    enableCards(); // re-add 'click' event listeners//
+    shuffleCards(); // cards shuffled//
+    resetTimer(); // set timer to 00's//
+    pauseTimer(); // pause timer (at 00's)//
     console.log(`STARTED=${started}, PAUSED=${paused}, VICTORY=${victory}, reset1`)
 })
 
@@ -149,8 +159,7 @@ function shuffleCards() {
 
 
 // 3.  WIN CONDITION FXN ------------------------------------------------------//
-// If all cards matched, show victory prompt w/ time score
-// If # of matchingPair = 6 then show prompt
+// If 
 
 
 // ---------- TO DO AREA END---------------------------------------------------//
