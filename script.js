@@ -2,7 +2,8 @@
 let started = false;
 let paused = false;
 let victory = false;
-const cards = document.querySelectorAll('.card')
+
+const cards = document.querySelectorAll('.card');
 cards.forEach(card => card.addEventListener('click', flipCard));
 
 shuffleCards(); // auto shuffles when page loads
@@ -97,6 +98,19 @@ function disableCards() { // disables matched pair
     }, 500)
 }
 
+function disappearCards() { // makes matched pair image disappear
+    firstCard.style.visibility = "hidden";
+    secondCard.style.visibility = "hidden";
+}
+
+function disappearAllCards() { // makes ALL cards disappear (testing purposes)
+    cards.forEach(card => card.style.visibility = "visible");
+}
+
+function reappearAllCards() { // makes all cards reappear (new game and reset)
+    cards.forEach(card => card.style.visibility = "visible");
+}
+
 function enableAllCards() { // enables all cards to flip again (used for new game and reset)
     cards.forEach(card => card.addEventListener('click', flipCard))
 }
@@ -108,15 +122,6 @@ function unflipCards() { // unflips incorrectly matched pair
         secondCard.classList.remove('flip-card');
         lockedBoard = false;
     }, 750)
-}
-
-function disappearCards() { // makes matched pair image disappear
-    firstCard.style.visibility = "hidden";
-    secondCard.style.visibility = "hidden";
-}
-
-function reappearAllCards() { // makes all cards reappear (new game and reset)
-    cards.forEach(card => card.style.visibility = "visible");
 }
 
 function resetBoard() { // resets stored-card clicks and unlocks board
@@ -162,23 +167,26 @@ function shuffleCards() { // shuffles cards
 
 // 3.  WIN CONDITION FXN ------------------------------------------------------//
 
-function assessWinCondition() { // checks if win condition has been met
-    if (cards.forEach(card => card.classList.length('flip-card')) == 12) {
-        console.log('winCondition1')
-    }
-}
+// function assessWinCondition() { // if win condition met, set victory to true, and show winScreen
+// if () { // win condition
+//     winScreen();
+// }
+
+// }
 
 function autoWin() { // create automatic win state for console testing purposes
-    cards.forEach(card => card.classList.add('flip-card'));
+    victory = true;
+    // cards.forEach(card => card.classList.add('flip-card'));
     winScreen();
     console.log('autoWin');
 }
 
-function winScreen() {
-    prompt(`Congratulations!!!  You've completed the Food Matching Game in ${document.getElementById('hour').innerText} hours, `
-        `${document.getElementById('minute').innerText} minutes, `
-        `${document.getElementById('second').innerText} seconds, `
-        `and ${document.getElementById('millisecond').innerText} milliseconds.  GREAT JOB!!!`)
+function winScreen() { // win alert
+    victory = true;
+    let currentTime = document.getElementById('timer').innerText;
+    alert(`Congratulations!!!  You've completed the Food Matching Game in: ${currentTime}`)
+    pauseTimer();
+    console.log('winScreen');
 }
 
 // ---------- TO DO AREA END---------------------------------------------------//
