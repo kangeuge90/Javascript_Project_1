@@ -30,25 +30,48 @@ startGame.addEventListener("click", (event) => {
 // flipCard.addEventListener("click", event => {
 
 // })
+let cardOne = null;
+let cardTwo = null;
 
 // const card = document.getElementById("card")
 // card.addEventListener("click", flipCard);
-// function flipCard(e) {
-//     card.classList.toggle("flip-card");
-// }
+function flipCard(e) {
+    e.currentTarget.classList.toggle("flip-card");
+        if (cardOne === null) {
+        cardOne = e.currentTarget;
+    } else {
+        cardTwo = e.currentTarget;
+        // check to see if it's a match
+        // if it's a match
+        // then remove cardOne and cardTwo
+        // if it's not a match
+        // flip cardOne and cardTwo back over
+        // reset both cards to null no matter what
+        let cardOneFood = cardOne.dataset.food;
+        let cardTwoFood = cardTwo.dataset.food;
+        setTimeout(() => {
+        if (cardOneFood === cardTwoFood) {
+           cardOne.style.visibility="hidden";
+           cardTwo.style.visibility="hidden";
 
-const flipCard = document.querySelectorAll(".card");
+        } else {
+           cardOne.classList.remove("flip-card");
+           cardTwo.classList.remove("flip-card");
+        }
+        cardOne = null;
+        cardTwo = null;
+    }, 500)
+    }
+}
+
+const cards = document.querySelectorAll(".card");
 if (started === false) {
-    for (let i = 0; i < flipCard.length; i++) {
-        flipCard[i].addEventListener("click", (event) => {
-            event.currentTarget.classList.toggle("flip-card");
-        })
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener("click", flipCard)
     }
 } else if (started === true && paused === true) {
-    for (let i = 0; i < flipCard.length; i++) {
-        flipCard[i].removeEventListener("click", (event) => {
-            event.currentTarget.classList.toggle("flip-card");
-        })
+    for (let i = 0; i < cards.length; i++) {
+       cards[i].removeEventListener("click", flipCard)
     }
 }
 
@@ -69,7 +92,7 @@ if (started === false) {
 // Must also refresh the game, bring back all cards to facedown
 
 // OR possible make an array of 6 images, that can only be assigned a maximum 
-// of two times to each div
+// of two times to each div     
 
 let hour = 0;
 let minute = 0;
@@ -81,10 +104,16 @@ let cron;
 function startTimer() {
     pauseTimer();
     cron = setInterval(() => { timer(); }, 10);
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener("click", flipCard)
+    }
 }
 
 function pauseTimer() {
     clearInterval(cron);
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].removeEventListener("click", flipCard)
+     }
 }
 
 function resetTimer() {
