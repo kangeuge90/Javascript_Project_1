@@ -2,6 +2,7 @@
 let started = false;
 let paused = false;
 let victory = false;
+let cardMatched = 0;
 
 const cards = document.querySelectorAll('.card');
 cards.forEach(card => card.addEventListener('click', flipCard));
@@ -16,6 +17,7 @@ startGame.addEventListener("click", (event) => {
         resetBoard(); // lockBoard state and card-clicked memory cleared//
         enableAllCards(); // re-add 'click' event listeners to All Cards//
         startTimer();
+        cardMatched = 0;
         paused = false;
         started = true;
         console.log(`PAUSED=${paused}, STARTED=${started}, startGame1`);
@@ -95,6 +97,8 @@ function disableCards() { // disables matched pair
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
         disappearCards();
+        cardMatched++;
+        assessWinCondition();
     }, 500)
 }
 
@@ -167,12 +171,13 @@ function shuffleCards() { // shuffles cards
 
 // 3.  WIN CONDITION FXN ------------------------------------------------------//
 
-// function assessWinCondition() { // if win condition met, set victory to true, and show winScreen
-// if () { // win condition
-//     winScreen();
-// }
 
-// }
+
+function assessWinCondition() { // if win condition met, set victory to true, and show winScreen
+    if (cardMatched === 6) {
+        winScreen();
+    }
+}
 
 function autoWin() { // create automatic win state for console testing purposes
     victory = true;
