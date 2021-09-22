@@ -10,18 +10,12 @@ body {
 }
 
 body {
-    height: 100vh;
+    height: 107vh;
     width: 100vw;
     background-image: linear-gradient(to bottom left, #0067b3, #40b0df, #ffd53d, #ffff02);
 }
 
 img {
-    /* height: 20vh;
-    min-height: 200px;
-    max-height: 300px;
-    width: 10vw;
-    min-width: 140px;
-    max-width: 210px; */
     height: 105px;
     width: 70px;
 }
@@ -37,39 +31,44 @@ header {
     display: flex;
     justify-content: center;
     width: 100vw;
+    position: relative;
 }
 
 .objects {
     display: flex;
-    /* justify-content: center; */
+    justify-content: space-between;
+    align-items: center;
     margin: auto;
     padding: 0 0 25px 0;
-    width: 300px;
+    width: 310px;
+}
+
+button {
+    font-size: 60%;
 }
 
 .start {
     border-radius: 10%;
-    width: 65px;
     margin: 0 25px;
 }
 
 .reset {
     border-radius: 10%;
-    width: 65px;
     margin: 0 25px;
+}
+
+#timer {
+    width: 110px;
 }
 
 .gameSection {
     display: flex;
     justify-content: center;
-    /* height: 470px;
-    width: 315px; */
 }
 
 .foods {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
     justify-content: space-between;
     height: 350px;
     width: 315px;
@@ -79,6 +78,7 @@ header {
     position: relative;
     transform-style: preserve-3d;
     transition: all 0.8s ease;
+    /* visibility: visible; */
 }
 
 .back {
@@ -98,57 +98,50 @@ header {
     transform: rotateY(180deg);
 }
 
+
+/* FACE UP END----------------- */
+
+
+/* FACE DOWN --------------*/
+
+
+/* .front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    text-align: center;
+    transform: rotateY(180deg);
+}
+
+.back {
+    position: relative;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    text-align: center;
+} */
+
+
+/* FACE DOWN END -------------------*/
+
 .flip-card {
     transform: rotateY(180deg);
 }
 
 @media only screen and (min-width:768px) {
     img {
-        /* min-height: 200px;
-        max-height: 300px;
-        min-width: 140px;
-        max-width: 210px; */
-        height: 220px;
-        width: 170px;
+        height: 200px;
+        width: 160px;
     }
     .foods {
-        height: 720px;
-        width: 765px;
+        height: 660px;
+        width: 725px;
+    }
+    .objects {
+        width: 700px;
+    }
+    button {
+        font-size: 100%;
     }
 }
-
-
-/* #hamburger {
-    background-image: Hamburger.jpg;
-
-}
-
-#pizza {
-   background-image: Pizza.jpg;
-}
-
-#spaghetti {
-background-image: Spaghetti.jpg;
-}
-
-#steak {
-background-image: Steak.jpg;
-}
-
-#sushi {
-background-image: Sushi.jpg;
-}
-
-#tacos {
-background-image: Tacos.jpg;
-} */
-
-
-/* 
-.facedown {
-
-}
-
-.faceup {
-
-} */
