@@ -81,24 +81,21 @@ button {
     /* visibility: visible; */
 }
 
-
-/*  FACE UP ------------------*/
-
 .back {
+    position: relative;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    text-align: center;
+}
+
+.front {
     position: absolute;
     top: 0;
     left: 0;
     backface-visibility: hidden;
     text-align: center;
     transform: rotateY(180deg);
-}
-
-.front {
-    position: relative;
-    top: 0;
-    left: 0;
-    backface-visibility: hidden;
-    text-align: center;
 }
 
 
