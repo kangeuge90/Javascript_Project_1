@@ -53,6 +53,7 @@ function flipCard() {
             hasFlipped = false;
             secondCard = this;
             assessMatch();
+            setTimeout(() => { resetBoard() }, 450); // bug fix for - after mismatch, imagetype of firstCard won't work
         }
         console.log('flipCard1');
     }
@@ -65,6 +66,7 @@ function flipCard() {
             hasFlipped = false;
             secondCard = this;
             assessMatch();
+            setTimeout(() => { resetBoard() }, 450); // bug fix for - after mismatch, imagetype of firstCard won't work
         }
         console.log('flipCard2');
     }
@@ -99,8 +101,9 @@ function disableCards() { // disables matched pair
         disappearCards();
         cardMatched++;
         assessWinCondition();
-    }, 500)
+    }, 450)
 }
+setTimeout(() => { resetBoard() }, 450);
 
 function disappearCards() { // makes matched pair image disappear
     firstCard.style.visibility = "hidden";
@@ -125,7 +128,7 @@ function unflipCards() { // unflips incorrectly matched pair
         firstCard.classList.remove('flip-card');
         secondCard.classList.remove('flip-card');
         lockedBoard = false;
-    }, 750)
+    }, 450)
 }
 
 function resetBoard() { // resets stored-card clicks and unlocks board
